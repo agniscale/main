@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6015G3L8N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y6015G3L8N');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AgniScale - Under Construction</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+:root {
+    --glass: rgba(25, 25, 25, 0.7);
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body {
+    background: #050505; /* Deep luxury black */
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; /* Prevents scroll for the coming soon page */
+}
+
+/* NAV - SAME AS BEFORE */
+.nav-wrapper {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 500px;
+    z-index: 9999;
+}
+
+.upper-bar {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 5px 8px 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LOGO */
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: linear-gradient(to right, #4d4d4d 0%, #fff 50%, #4d4d4d 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: silverFlow 3s linear infinite;
+}
+@keyframes silverFlow {
+    to { background-position: 200% center; }
+}
+
+.logo span {
+    font-size: 14px;
+}
+
+/* MENU */
+.circular-menu {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.menu-open { display: none; }
+
+.menu-item, .menu-open-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* MAIN BUTTON */
+.menu-open-button {
+    z-index: 10;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.menu-open-button:active {
+    transform: scale(0.9);
+}
+
+/* ITEMS */
+.menu-item {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1px solid var(--border);
+    transform: scale(0.5);
+    opacity: 0;
+    transition: all 0.35s ease;
+    text-decoration: none;
+}
+
+/* SHOW ITEMS */
+.menu-open:checked ~ .menu-item {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* SPREAD (4 items, but 1 is hidden by default) */
+.menu-open:checked ~ .menu-item:nth-child(3){ transform: translate3d(-50px,0,0); }
+.menu-open:checked ~ .menu-item:nth-child(4){ transform: translate3d(-95px,0,0); }
+.menu-open:checked ~ .menu-item:nth-child(5){ transform: translate3d(-140px,0,0); }
+.menu-open:checked ~ .menu-item:nth-child(6){ transform: translate3d(-185px,0,0); }
+
+/* HOVER */
+@media (hover:hover){
+    .menu-item:hover{
+        background:#fff;
+        color:#000;
+    }
+}
+
+/* =========================================
+   NEW: LUXURY UNDER CONSTRUCTION SECTION 
+========================================= */
+.hero-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.luxury-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    /* Soft Gold/Champagne Gradient */
+    background: linear-gradient(to right, #C6A87C 0%, #FFF5D1 50%, #C6A87C 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: silverFlow 5s linear infinite;
+    margin-bottom: 15px;
+}
+
+.luxury-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: clamp(0.7rem, 1vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.luxury-subtitle::before,
+.luxury-subtitle::after {
+    content: "—";
+    margin: 0 10px;
+    color: #C6A87C;
+    opacity: 0.5;
+}
+
+/* =========================================
+   NEW: POPUP / TOAST NOTIFICATION 
+========================================= */
+.toast-popup {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(198, 168, 124, 0.3); /* Subtle gold border */
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    z-index: 10000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.toast-popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+.toast-popup i {
+    color: #C6A87C;
+    margin-right: 8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="nav-wrapper">
+    <div class="upper-bar">
+
+        <div class="logo">Agni<span>Scale</span></div>
+
+        <nav class="circular-menu">
+
+            <input type="checkbox" id="menu-open" class="menu-open">
+
+            <label class="menu-open-button" for="menu-open">
+                <i id="main-icon" class="fa fa-home"></i>
+            </label>
+
+            <a href="#" class="menu-item" data-icon="fa-home" id="home-icon">
+                <i class="fa fa-home"></i>
+            </a>
+
+            <a href="#" class="menu-item" data-icon="fa-diamond">
+                <i class="fa fa-diamond"></i>
+            </a>
+
+            <a href="#" class="menu-item" data-icon="fa-cog">
+                <i class="fa fa-cog"></i>
+            </a>
+
+            <a href="#" class="menu-item" data-icon="fa-envelope">
+                <i class="fa fa-envelope"></i>
+            </a>
+
+        </nav>
+    </div>
+</div>
+
+<div class="hero-container">
+    <h1 class="luxury-title">Site Under Construction</h1>
+    <p class="luxury-subtitle">Come back in a few months</p>
+</div>
+
+<div id="toast" class="toast-popup"><i class="fa fa-clock-o"></i>coming soon</div>
+
+<script>
+// 🔥 LUXURY NAV & POPUP LOGIC
+
+// 1. Hide the duplicate Home icon from the pop-out menu just like your original code
+document.getElementById('home-icon').style.display = 'none';
+
+// 2. Popup Logic
+const toast = document.getElementById('toast');
+let toastTimer;
+
+const menuLinks = document.querySelectorAll('.menu-item');
+
+menuLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault(); // Redirect hone se rokega
+        
+        // Show the popup
+        toast.classList.add('show');
+        
+        // Hide the popup after 3 seconds
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+        
+        // Optional: Close the menu after clicking an item
+        document.getElementById('menu-open').checked = false;
+    });
+});
+</script>
+
+</body>
+</html>
