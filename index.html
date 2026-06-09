@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISQ — Under Construction</title>
+    <style>
+        /* Google Fonts से एक बेहद क्लासिक और लक्जरी फॉन्ट */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a; /* एकदम गहरा डार्क प्रीमियम बैकग्राउंड */
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* बैकग्राउंड में एक हल्का सा विंटेज/लक्जरी इफेक्ट */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(40,40,40,0.3) 0%, rgba(10,10,10,1) 80%);
+            z-index: 1;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        /* लक्जरी ब्रांड नेम */
+        .brand-name {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #b38728, #fbf5b7, #da1b1b, #aa771c); /* गोल्ड और हल्का सा रेड (इश्क का दर्द) */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        /* ओनर की सिचुएशन बयां करता हुआ लग्जरी सब-टेक्स्ट */
+        .luxury-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            line-height: 1.8;
+            color: #a3a3a3;
+            text-transform: uppercase;
+            animation: fadeInSlow 5s ease-in-out;
+        }
+
+        .rose-icon {
+            margin-top: 30px;
+            font-size: 24px;
+            color: #8b0000; /* डार्क रेड रोज */
+            opacity: 0.6;
+            letter-spacing: 10px;
+        }
+
+        /* एनिमेशन ताकि पेज लाइव और सिल्क जैसा स्मूथ लगे */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes fadeInSlow {
+            0% { opacity: 0; }
+            40% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* मोबाइल स्क्रीन्स के लिए एडजस्टमेंट */
+        @media (max-width: 768px) {
+            .brand-name {
+                font-size: 2.5rem;
+                letter-spacing: 8px;
+            }
+            .luxury-text {
+                font-size: 0.9rem;
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand-name">ISQ</div>
+        
+        <p class="luxury-text">
+            Architecting Silence.<br>
+            The creator is temporarily disconnected from his future muse.<br>
+            Healing in progress.
+        </p>
+
+        <div class="rose-icon">🥀</div>
+    </div>
+
+</body>
+</html>
