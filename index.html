@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Space</title>
+  <title>Business On Hold | Interactive Space</title>
   <style>
     * {
       margin: 0;
@@ -17,15 +17,21 @@
       overflow: hidden;
       font-family: "Lato", sans-serif;
       user-select: none;
+      background-color: #090a0f;
     }
 
+    /* Outer Container */
     .container {
-      height: 100%;
-      width: 100%;
+      height: 100vh;
+      width: 100vw;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       overflow: hidden;
       position: relative;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
     }
 
     /* Base Star Styles */
@@ -36,6 +42,7 @@
       left: 0;
       width: 100%;
       height: 100%;
+      pointer-events: none;
     }
 
     #stars {
@@ -110,55 +117,115 @@
         672px 1267px #fff, 939px 668px #fff, 1969px 645px #fff, 1126px 983px #fff;
     }
 
-    /* Speed boost on click */
-    .hyper-speed #stars { animation-duration: 5s !important; }
-    .hyper-speed #stars2 { animation-duration: 8s !important; }
-    .hyper-speed #stars3 { animation-duration: 12s !important; }
+    /* Hyper-Speed Effect on Click */
+    .hyper-speed #stars { animation-duration: 4s !important; }
+    .hyper-speed #stars2 { animation-duration: 6s !important; }
+    .hyper-speed #stars3 { animation-duration: 8s !important; }
 
-    /* Title UI */
+    /* Title Section */
     #title {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
+      position: relative;
+      margin-top: 12vh;
       color: #fff;
       text-align: center;
       font-weight: 300;
-      font-size: 45px;
-      letter-spacing: 8px;
-      margin-top: -60px;
+      font-size: 42px;
+      letter-spacing: 6px;
       opacity: 0;
       transform: translateY(30px);
       animation: introFadeUp 1.2s ease-out forwards;
       pointer-events: none;
+      z-index: 10;
+      padding: 0 20px;
     }
 
     #title span {
-      background: -webkit-linear-gradient(#ffffff, #38495a);
+      background: linear-gradient(180deg, #ffffff 0%, #7f97b0 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: block;
+      text-transform: uppercase;
+      font-weight: 700;
     }
 
     .sub-text {
-      font-size: 14px;
+      font-size: 15px;
       letter-spacing: 3px;
-      color: #8fa0b5;
-      margin-top: 15px;
+      color: #f7e479;
+      margin-top: 18px;
       text-transform: uppercase;
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
-    /* Click Ripple Effect */
+    .sub-text #click-count {
+      font-weight: bold;
+      color: #ffffff;
+      background: rgba(247, 228, 121, 0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(247, 228, 121, 0.4);
+    }
+
+    /* Dino Loader Container */
+    .dino-loader {
+      width: 100%;
+      max-width: 600px;
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 50px;
+      z-index: 5;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      filter: invert(1) hue-rotate(180deg); /* Dark Theme Compatibility */
+      opacity: 0.85;
+    }
+
+    .dino-runner {
+      width: 44px;
+      height: 47px;
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      margin-left: -22px;
+      z-index: 2;
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAAvAgMAAABiRrxWAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAAPpJREFUeF7d0jFKRkEMhdGLMM307itNLALyVmHvJuzTDMjdn72E95PGFEZSmeoU4YMMgxhskvQec8YSVFX1NhGcS5ywtbmC8khcZeKq+ZWJ4F8Sr2+ZCErjkJFEfcjAc/6/BMlfcz6xHdhRthYzIZhIHMcTVY1scUUiAphK8CMSPUbieTBhvD9Lj0vyV4wklEGzHpciKGOJoBp7XDcFs4kWxxM7Ey3iZ8JbzASAvMS7XLOJHTTvEkEZSeQl7DMuwVyCasqK5+XzQRYLUJlMbPXjFcn3m8eKBSjWZMJwvGIOvViAzCbUj1VEDoqFOEQGE3SyInJQLOQMJL4B7enP1UbLXJQAAAAASUVORK5CYII=");
+      animation:
+        dinoRun 0.25s infinite steps(2),
+        dinoJump 1.5s infinite linear;
+    }
+
+    .dino-obstacle {
+      width: 17px;
+      height: 35px;
+      position: absolute;
+      bottom: 12px;
+      right: -50px;
+      z-index: 1;
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAAAjCAMAAABRlI+PAAAADFBMVEX////////39/dTU1PhglcSAAAAAXRSTlMAQObYZgAAAPNJREFUeF7tlkEKwzAMBLXr//+5iQhU7gRRQkyhZI+DhwH74jhmO+oIJBVwURljuAXagG5QqkSgBLqg3JnxJ1Cb8SmQ3o6gpO85owGlOB4m2BNKJ11BSd01owGlOHkcIAuHkz6UNpPKgozPM54dADHjJuNhZiJxdQCQgZJeBczgCAAy3yhPJvcnmdC9mZwBIsQMFV5AkzHBNknFgcKM+oyDIFcfCAoy03m+jSMIcmoVZkKqSjr1fghyahRmoKRUHYLiSI1SMlCq5CDgX6BXmKkfn+oQ0KEyyrzoy8GbXJ9xrM/YjhUZgl9nnsyTCe9rgSRdV15CwRcIEu8GGQAAAABJRU5ErkJggg==");
+      animation: moveObstacle 1.5s infinite linear;
+    }
+
+    .dino-ground {
+      width: 100%;
+      height: 12px;
+      position: absolute;
+      bottom: 0px;
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAAAMAgMAAAAPCKxBAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAALJJREFUeF7t1EEKAyEMhtEvMNm7sPfJEVyY+1+ltLgYAsrQCatWhbxEhQvgxIJtSZypxa/WGshgzKdbq/UihMFMlt3o/CspEYoihIMaAb6mCvM6C+BTAeyo+wN4yykV/6pVfkdLpVyI1hh7GJ6QunUoLEQlQglNP2nkQkeF8+ei9cLxMue1qxVRfk1Ej0s6AEGWfVOk0QUtnK5Xo0Lac6wpdtnQqB6VxomPaz+dgF1PaqqmeWJlz1jYUaSIAAAAASUVORK5CYII=");
+      background-repeat: repeat-x;
+      animation: moveGround 4s linear infinite;
+    }
+
+    /* Ripple Effect */
     .ripple {
       position: absolute;
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(247, 228, 121, 0.8);
       border-radius: 50%;
       transform: scale(0);
       animation: ripple-effect 0.8s ease-out;
       pointer-events: none;
     }
 
+    /* Keyframe Animations */
     @keyframes animStar {
       from { transform: translateY(0px); }
       to { transform: translateY(-2000px); }
@@ -171,9 +238,30 @@
 
     @keyframes ripple-effect {
       to {
-        transform: scale(4);
+        transform: scale(5);
         opacity: 0;
       }
+    }
+
+    @keyframes dinoRun {
+      from { background-position: -44px 0; }
+      to { background-position: -132px 0; }
+    }
+
+    @keyframes dinoJump {
+      0%, 35% { transform: translateY(0); }
+      50% { transform: translateY(-55px); }
+      65%, 100% { transform: translateY(0); }
+    }
+
+    @keyframes moveObstacle {
+      0% { right: -50px; }
+      100% { right: 100%; }
+    }
+
+    @keyframes moveGround {
+      from { background-position: 0 0; }
+      to { background-position: -1200px 0; }
     }
   </style>
 </head>
@@ -184,21 +272,37 @@
     <div id="stars2" class="star-layer"></div>
     <div id="stars3" class="star-layer"></div>
 
- <div id="title">
-  <span>This business is on hold</span>
-  <div class="sub-text">Click here 100k times to see why</div>
-</div>
+    <div id="title">
+      <span>This business is on hold</span>
+      <div class="sub-text">Click here <span id="click-count">100,000</span> times to see why</div>
+    </div>
+
+    <div class="dino-loader">
+      <div class="dino-runner"></div>
+      <div class="dino-obstacle"></div>
+      <div class="dino-ground"></div>
+    </div>
+  </div>
 
   <script>
     const container = document.getElementById('spaceContainer');
+    const clickCountEl = document.getElementById('click-count');
+    
+    let clicksRemaining = 100000;
     let isWarping = false;
 
     container.addEventListener('click', (e) => {
-      // 1. Create Ripple Effect at click location
+      // 1. Counter Decrement
+      if (clicksRemaining > 0) {
+        clicksRemaining--;
+        clickCountEl.textContent = clicksRemaining.toLocaleString();
+      }
+
+      // 2. Ripple Visual Effect
       const ripple = document.createElement('div');
       ripple.classList.add('ripple');
       
-      const size = 100;
+      const size = 80;
       ripple.style.width = `${size}px`;
       ripple.style.height = `${size}px`;
       ripple.style.left = `${e.clientX - size / 2}px`;
@@ -210,16 +314,15 @@
         ripple.remove();
       }, 800);
 
-      // 2. Warp Speed Animation Toggle
+      // 3. Hyper Speed Animation Trigger
       if (!isWarping) {
         isWarping = true;
         container.classList.add('hyper-speed');
 
-        // Reset speed after 2.5 seconds
         setTimeout(() => {
           container.classList.remove('hyper-speed');
           isWarping = false;
-        }, 2500);
+        }, 2000);
       }
     });
   </script>
