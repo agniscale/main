@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business On Hold | Interactive Space</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inactive Notice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -11,320 +12,222 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: "Lato", sans-serif;
-      user-select: none;
-      background-color: #090a0f;
-    }
-
-    /* Outer Container */
-    .container {
-      height: 100vh;
+    body {
       width: 100vw;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      height: 100vh;
+      background-color: #090a0f;
       overflow: hidden;
+      font-family: 'Poppins', sans-serif;
       position: relative;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
     }
 
-    /* Base Star Styles */
-    .star-layer {
+    /* Loader aur Card dono ko screen ke exact center me overlay karne ke liye */
+    .loader-container, .card {
       position: absolute;
-      background: transparent;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    #stars {
-      width: 1px;
-      height: 1px;
-      box-shadow: 
-        501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 
-        904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 
-        367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff,
-        439px 472px #fff, 1491px 677px #fff, 34px 382px #fff, 1221px 1584px #fff,
-        659px 18px #fff, 1731px 1959px #fff, 80px 712px #fff, 326px 1605px #fff;
-      animation: animStar 50s linear infinite;
-    }
-    #stars::after {
-      content: " ";
-      position: absolute;
-      top: 2000px;
-      width: 1px;
-      height: 1px;
-      background: transparent;
-      box-shadow: 
-        501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 
-        904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 
-        367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff,
-        439px 472px #fff, 1491px 677px #fff, 34px 382px #fff, 1221px 1584px #fff,
-        659px 18px #fff, 1731px 1959px #fff, 80px 712px #fff, 326px 1605px #fff;
-    }
-
-    #stars2 {
-      width: 2px;
-      height: 2px;
-      box-shadow: 
-        1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 
-        661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff, 1208px 1802px #fff, 
-        853px 1757px #fff, 1149px 937px #fff, 1353px 428px #fff, 270px 279px #fff, 
-        666px 1097px #fff, 1425px 1278px #fff, 806px 156px #fff, 1252px 561px #fff;
-      animation: animStar 100s linear infinite;
-    }
-    #stars2::after {
-      content: " ";
-      position: absolute;
-      top: 2000px;
-      width: 2px;
-      height: 2px;
-      background: transparent;
-      box-shadow: 
-        1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 
-        661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff, 1208px 1802px #fff, 
-        853px 1757px #fff, 1149px 937px #fff, 1353px 428px #fff, 270px 279px #fff, 
-        666px 1097px #fff, 1425px 1278px #fff, 806px 156px #fff, 1252px 561px #fff;
-    }
-
-    #stars3 {
-      width: 3px;
-      height: 3px;
-      box-shadow: 
-        200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 
-        899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff, 1626px 689px #fff, 
-        672px 1267px #fff, 939px 668px #fff, 1969px 645px #fff, 1126px 983px #fff;
-      animation: animStar 150s linear infinite;
-    }
-    #stars3::after {
-      content: " ";
-      position: absolute;
-      top: 2000px;
-      width: 3px;
-      height: 3px;
-      background: transparent;
-      box-shadow: 
-        200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 
-        899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff, 1626px 689px #fff, 
-        672px 1267px #fff, 939px 668px #fff, 1969px 645px #fff, 1126px 983px #fff;
-    }
-
-    /* Hyper-Speed Effect on Click */
-    .hyper-speed #stars { animation-duration: 4s !important; }
-    .hyper-speed #stars2 { animation-duration: 6s !important; }
-    .hyper-speed #stars3 { animation-duration: 8s !important; }
-
-    /* Title Section */
-    #title {
-      position: relative;
-      margin-top: 12vh;
-      color: #fff;
-      text-align: center;
-      font-weight: 300;
-      font-size: 42px;
-      letter-spacing: 6px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: introFadeUp 1.2s ease-out forwards;
-      pointer-events: none;
-      z-index: 10;
-      padding: 0 20px;
-    }
-
-    #title span {
-      background: linear-gradient(180deg, #ffffff 0%, #7f97b0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: block;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .sub-text {
-      font-size: 15px;
-      letter-spacing: 3px;
-      color: #f7e479;
-      margin-top: 18px;
-      text-transform: uppercase;
-      opacity: 0.9;
-    }
-
-    .sub-text #click-count {
-      font-weight: bold;
-      color: #ffffff;
-      background: rgba(247, 228, 121, 0.2);
-      padding: 2px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(247, 228, 121, 0.4);
-    }
-
-    /* Dino Loader Container */
-    .dino-loader {
-      width: 100%;
-      max-width: 600px;
-      height: 120px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 50px;
-      z-index: 5;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      filter: invert(1) hue-rotate(180deg); /* Dark Theme Compatibility */
-      opacity: 0.85;
-    }
-
-    .dino-runner {
-      width: 44px;
-      height: 47px;
-      position: absolute;
-      bottom: 12px;
+      top: 50%;
       left: 50%;
-      margin-left: -22px;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ==================== LOADER CONTAINER ==================== */
+    .loader-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s ease-out;
+      will-change: opacity;
       z-index: 2;
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAAvAgMAAABiRrxWAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAAPpJREFUeF7d0jFKRkEMhdGLMM307itNLALyVmHvJuzTDMjdn72E95PGFEZSmeoU4YMMgxhskvQec8YSVFX1NhGcS5ywtbmC8khcZeKq+ZWJ4F8Sr2+ZCErjkJFEfcjAc/6/BMlfcz6xHdhRthYzIZhIHMcTVY1scUUiAphK8CMSPUbieTBhvD9Lj0vyV4wklEGzHpciKGOJoBp7XDcFs4kWxxM7Ey3iZ8JbzASAvMS7XLOJHTTvEkEZSeQl7DMuwVyCasqK5+XzQRYLUJlMbPXjFcn3m8eKBSjWZMJwvGIOvViAzCbUj1VEDoqFOEQGE3SyInJQLOQMJL4B7enP1UbLXJQAAAAASUVORK5CYII=");
-      animation:
-        dinoRun 0.25s infinite steps(2),
-        dinoJump 1.5s infinite linear;
     }
 
-    .dino-obstacle {
-      width: 17px;
-      height: 35px;
-      position: absolute;
-      bottom: 12px;
-      right: -50px;
-      z-index: 1;
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAAAjCAMAAABRlI+PAAAADFBMVEX////////39/dTU1PhglcSAAAAAXRSTlMAQObYZgAAAPNJREFUeF7tlkEKwzAMBLXr//+5iQhU7gRRQkyhZI+DhwH74jhmO+oIJBVwURljuAXagG5QqkSgBLqg3JnxJ1Cb8SmQ3o6gpO85owGlOB4m2BNKJ11BSd01owGlOHkcIAuHkz6UNpPKgozPM54dADHjJuNhZiJxdQCQgZJeBczgCAAy3yhPJvcnmdC9mZwBIsQMFV5AkzHBNknFgcKM+oyDIFcfCAoy03m+jSMIcmoVZkKqSjr1fghyahRmoKRUHYLiSI1SMlCq5CDgX6BXmKkfn+oQ0KEyyrzoy8GbXJ9xrM/YjhUZgl9nnsyTCe9rgSRdV15CwRcIEu8GGQAAAABJRU5ErkJggg==");
-      animation: moveObstacle 1.5s infinite linear;
-    }
-
-    .dino-ground {
-      width: 100%;
-      height: 12px;
-      position: absolute;
-      bottom: 0px;
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAAAMAgMAAAAPCKxBAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAALJJREFUeF7t1EEKAyEMhtEvMNm7sPfJEVyY+1+ltLgYAsrQCatWhbxEhQvgxIJtSZypxa/WGshgzKdbq/UihMFMlt3o/CspEYoihIMaAb6mCvM6C+BTAeyo+wN4yykV/6pVfkdLpVyI1hh7GJ6QunUoLEQlQglNP2nkQkeF8+ei9cLxMue1qxVRfk1Ej0s6AEGWfVOk0QUtnK5Xo0Lac6wpdtnQqB6VxomPaz+dgF1PaqqmeWJlz1jYUaSIAAAAASUVORK5CYII=");
-      background-repeat: repeat-x;
-      animation: moveGround 4s linear infinite;
-    }
-
-    /* Ripple Effect */
-    .ripple {
-      position: absolute;
-      border: 1px solid rgba(247, 228, 121, 0.8);
-      border-radius: 50%;
-      transform: scale(0);
-      animation: ripple-effect 0.8s ease-out;
+    .loader-container.hide {
+      opacity: 0;
       pointer-events: none;
+      display: none;
     }
 
-    /* Keyframe Animations */
-    @keyframes animStar {
-      from { transform: translateY(0px); }
-      to { transform: translateY(-2000px); }
+    /* ==================== LOADER STYLES ==================== */
+    .loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      --color: #dddddd;
+      --animation: 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
     }
 
-    @keyframes introFadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .loader .circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--color);
+      border-radius: 50%;
+      margin: 0 8px;
+      background-color: transparent;
+      animation: circle-keys var(--animation);
+      will-change: transform, opacity;
     }
 
-    @keyframes ripple-effect {
-      to {
-        transform: scale(5);
-        opacity: 0;
-      }
+    .loader .circle .dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      margin-top: -7px;
+      margin-left: -7px;
+      border-radius: 50%;
+      background-color: var(--color);
+      animation: dot-keys var(--animation);
+      will-change: transform;
     }
 
-    @keyframes dinoRun {
-      from { background-position: -44px 0; }
-      to { background-position: -132px 0; }
+    .loader .circle .outline {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin-top: -10px;
+      margin-left: -10px;
+      border-radius: 50%;
+      animation: outline-keys var(--animation);
+      will-change: transform, opacity;
     }
 
-    @keyframes dinoJump {
-      0%, 35% { transform: translateY(0); }
-      50% { transform: translateY(-55px); }
-      65%, 100% { transform: translateY(0); }
+    /* Delays Optimization */
+    .circle:nth-child(2), .circle:nth-child(2) .dot { animation-delay: 0.2s; }
+    .circle:nth-child(3), .circle:nth-child(3) .dot { animation-delay: 0.4s; }
+    .circle:nth-child(4), .circle:nth-child(4) .dot { animation-delay: 0.6s; }
+
+    .circle:nth-child(1) .outline { animation-delay: 0.6s; }
+    .circle:nth-child(2) .outline { animation-delay: 0.8s; }
+    .circle:nth-child(3) .outline { animation-delay: 1.0s; }
+    .circle:nth-child(4) .outline { animation-delay: 1.2s; }
+
+    @keyframes circle-keys {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.5; }
     }
 
-    @keyframes moveObstacle {
-      0% { right: -50px; }
-      100% { right: 100%; }
+    @keyframes dot-keys {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(0); }
     }
 
-    @keyframes moveGround {
-      from { background-position: 0 0; }
-      to { background-position: -1200px 0; }
+    @keyframes outline-keys {
+      0% { transform: scale(0); outline: 15px solid var(--color); opacity: 1; }
+      100% { transform: scale(1); outline: 0px solid transparent; opacity: 0; }
+    }
+
+    /* ==================== CARD STYLES ==================== */
+    .card {
+      width: 310px;
+      height: 76px;
+      background: #232326;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translate(-50%, calc(-50% + 15px));
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      will-change: transform, opacity;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+      pointer-events: auto;
+    }
+
+    .card:hover {
+      cursor: pointer;
+      transform: translate(-50%, calc(-50% - 3px));
+    }
+
+    .img {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #d7cfcf, #9198e5);
+      flex-shrink: 0;
+      transition: background 0.3s ease;
+    }
+
+    .card:hover > .img {
+      background: linear-gradient(135deg, #9198e5, #712020);
+    }
+
+    .textBox {
+      margin-left: 12px;
+      color: white;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .textContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .span {
+      font-size: 9px;
+      opacity: 0.6;
+    }
+
+    .h1 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ff5555;
+    }
+
+    .p {
+      font-size: 11px;
+      font-weight: 300;
+      opacity: 0.9;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   </style>
 </head>
 <body>
 
-  <div class="container" id="spaceContainer">
-    <div id="stars" class="star-layer"></div>
-    <div id="stars2" class="star-layer"></div>
-    <div id="stars3" class="star-layer"></div>
-
-    <div id="title">
-      <span>This business is on hold</span>
-      <div class="sub-text">Click here <span id="click-count">100,000</span> times to see why</div>
+  <div class="loader-container" id="loaderContainer">
+    <div class="loader">
+      <div class="circle"><div class="dot"></div><div class="outline"></div></div>
+      <div class="circle"><div class="dot"></div><div class="outline"></div></div>
+      <div class="circle"><div class="dot"></div><div class="outline"></div></div>
+      <div class="circle"><div class="dot"></div><div class="outline"></div></div>
     </div>
+  </div>
 
-    <div class="dino-loader">
-      <div class="dino-runner"></div>
-      <div class="dino-obstacle"></div>
-      <div class="dino-ground"></div>
+  <div class="card" id="errorCard">
+    <div class="img"></div>
+    <div class="textBox">
+      <div class="textContent">
+        <p class="h1">ERROR 403</p>
+        <span class="span">More than a month ago</span>
+      </div>
+      <p class="p">Owner of this business is inactive!</p>
     </div>
   </div>
 
   <script>
-    const container = document.getElementById('spaceContainer');
-    const clickCountEl = document.getElementById('click-count');
-    
-    let clicksRemaining = 100000;
-    let isWarping = false;
+    setTimeout(() => {
+      const loader = document.getElementById('loaderContainer');
+      const card = document.getElementById('errorCard');
 
-    container.addEventListener('click', (e) => {
-      // 1. Counter Decrement
-      if (clicksRemaining > 0) {
-        clicksRemaining--;
-        clickCountEl.textContent = clicksRemaining.toLocaleString();
-      }
-
-      // 2. Ripple Visual Effect
-      const ripple = document.createElement('div');
-      ripple.classList.add('ripple');
-      
-      const size = 80;
-      ripple.style.width = `${size}px`;
-      ripple.style.height = `${size}px`;
-      ripple.style.left = `${e.clientX - size / 2}px`;
-      ripple.style.top = `${e.clientY - size / 2}px`;
-
-      container.appendChild(ripple);
-
-      setTimeout(() => {
-        ripple.remove();
-      }, 800);
-
-      // 3. Hyper Speed Animation Trigger
-      if (!isWarping) {
-        isWarping = true;
-        container.classList.add('hyper-speed');
-
-        setTimeout(() => {
-          container.classList.remove('hyper-speed');
-          isWarping = false;
-        }, 2000);
-      }
-    });
+      loader.classList.add('hide');
+      card.classList.add('show');
+    }, 2000);
   </script>
 
 </body>
