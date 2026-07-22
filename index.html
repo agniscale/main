@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Space</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Lato", sans-serif;
+      user-select: none;
+    }
+
+    .container {
+      height: 100%;
+      width: 100%;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* Base Star Styles */
+    .star-layer {
+      position: absolute;
+      background: transparent;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #stars {
+      width: 1px;
+      height: 1px;
+      box-shadow: 
+        501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 
+        904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 
+        367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff,
+        439px 472px #fff, 1491px 677px #fff, 34px 382px #fff, 1221px 1584px #fff,
+        659px 18px #fff, 1731px 1959px #fff, 80px 712px #fff, 326px 1605px #fff;
+      animation: animStar 50s linear infinite;
+    }
+    #stars::after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 1px;
+      height: 1px;
+      background: transparent;
+      box-shadow: 
+        501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 
+        904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 
+        367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff,
+        439px 472px #fff, 1491px 677px #fff, 34px 382px #fff, 1221px 1584px #fff,
+        659px 18px #fff, 1731px 1959px #fff, 80px 712px #fff, 326px 1605px #fff;
+    }
+
+    #stars2 {
+      width: 2px;
+      height: 2px;
+      box-shadow: 
+        1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 
+        661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff, 1208px 1802px #fff, 
+        853px 1757px #fff, 1149px 937px #fff, 1353px 428px #fff, 270px 279px #fff, 
+        666px 1097px #fff, 1425px 1278px #fff, 806px 156px #fff, 1252px 561px #fff;
+      animation: animStar 100s linear infinite;
+    }
+    #stars2::after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 2px;
+      height: 2px;
+      background: transparent;
+      box-shadow: 
+        1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 
+        661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff, 1208px 1802px #fff, 
+        853px 1757px #fff, 1149px 937px #fff, 1353px 428px #fff, 270px 279px #fff, 
+        666px 1097px #fff, 1425px 1278px #fff, 806px 156px #fff, 1252px 561px #fff;
+    }
+
+    #stars3 {
+      width: 3px;
+      height: 3px;
+      box-shadow: 
+        200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 
+        899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff, 1626px 689px #fff, 
+        672px 1267px #fff, 939px 668px #fff, 1969px 645px #fff, 1126px 983px #fff;
+      animation: animStar 150s linear infinite;
+    }
+    #stars3::after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 3px;
+      height: 3px;
+      background: transparent;
+      box-shadow: 
+        200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 
+        899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff, 1626px 689px #fff, 
+        672px 1267px #fff, 939px 668px #fff, 1969px 645px #fff, 1126px 983px #fff;
+    }
+
+    /* Speed boost on click */
+    .hyper-speed #stars { animation-duration: 5s !important; }
+    .hyper-speed #stars2 { animation-duration: 8s !important; }
+    .hyper-speed #stars3 { animation-duration: 12s !important; }
+
+    /* Title UI */
+    #title {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      color: #fff;
+      text-align: center;
+      font-weight: 300;
+      font-size: 45px;
+      letter-spacing: 8px;
+      margin-top: -60px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: introFadeUp 1.2s ease-out forwards;
+      pointer-events: none;
+    }
+
+    #title span {
+      background: -webkit-linear-gradient(#ffffff, #38495a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+    }
+
+    .sub-text {
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: #8fa0b5;
+      margin-top: 15px;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    /* Click Ripple Effect */
+    .ripple {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple-effect 0.8s ease-out;
+      pointer-events: none;
+    }
+
+    @keyframes animStar {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-2000px); }
+    }
+
+    @keyframes introFadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes ripple-effect {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="spaceContainer">
+    <div id="stars" class="star-layer"></div>
+    <div id="stars2" class="star-layer"></div>
+    <div id="stars3" class="star-layer"></div>
+
+ <div id="title">
+  <span>This business is on hold</span>
+  <div class="sub-text">Click here 100k times to see why</div>
+</div>
+
+  <script>
+    const container = document.getElementById('spaceContainer');
+    let isWarping = false;
+
+    container.addEventListener('click', (e) => {
+      // 1. Create Ripple Effect at click location
+      const ripple = document.createElement('div');
+      ripple.classList.add('ripple');
+      
+      const size = 100;
+      ripple.style.width = `${size}px`;
+      ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - size / 2}px`;
+      ripple.style.top = `${e.clientY - size / 2}px`;
+
+      container.appendChild(ripple);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 800);
+
+      // 2. Warp Speed Animation Toggle
+      if (!isWarping) {
+        isWarping = true;
+        container.classList.add('hyper-speed');
+
+        // Reset speed after 2.5 seconds
+        setTimeout(() => {
+          container.classList.remove('hyper-speed');
+          isWarping = false;
+        }, 2500);
+      }
+    });
+  </script>
+
+</body>
+</html>
